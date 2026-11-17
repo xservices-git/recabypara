@@ -1,0 +1,32 @@
+{
+  "manifest_version": 3,
+  "name": "reCAPTCHA Auto-Solver",
+  "version": "1.0.0",
+  "description": "Solves reCAPTCHA v2 image challenges (including dynamic ones) with a vision model and clicks the correct tiles.",
+  "permissions": ["storage", "scripting", "activeTab", "tabs"],
+  "host_permissions": [
+    "https://9r.xteam.one/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*",
+    "https://*/*",
+    "http://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/recaptcha/api2/bframe*",
+        "https://google.com/recaptcha/api2/bframe*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_title": "reCAPTCHA Solver",
+    "default_popup": "popup.html"
+  }
+}
